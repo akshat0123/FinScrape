@@ -1,0 +1,20 @@
+{
+
+	"Mods": {
+
+		"initial": {
+
+			"wikipedia": "wiki_mod" 
+
+		},
+
+		"daily": {
+
+			"yahoo_summary": "yahoo_summary_mod",
+			"yahoo_statistics": "yahoo_statistics_mod"
+
+		}
+
+	}
+
+}
