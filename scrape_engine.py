@@ -1,5 +1,5 @@
 from scrape_module import Scrape_Module
-import psycopg2, json, imp
+import psycopg2, random, math, json, time, file, imp, sys
 
 class Scrape_Engine:
 
@@ -60,17 +60,42 @@ class Scrape_Engine:
 
     def scrape_run(self, frequency, url_vars=['']):
 
+        file = open("errors.log", "w")
+
         conn = psycopg2.connect(self.con_string)
         cur = conn.cursor()
 
         for mod_name in self.mods[frequency]:
 
             mod = self.mods[frequency][mod_name]
+            progress = 0
 
             for url_var in url_vars: 
                 
                 url = mod.generate_url(url_var)
-                self.scrape_page(mod, cur, url)
+
+                try: 
+
+                    self.scrape_page(mod, cur, url)
+
+                except:
+
+                    error = "There was an error retrieving the %s url from the %s module" %\
+                            (url_var, mod_name)
+
+                    file.write(error)
+
+                progress_bar = '#' * int(math.floor((float(progress)/len(url_vars))*10))
+                remaining = ' ' * (10 - int(math.floor((float(progress)/len(url_vars))*10)))
+                progress_bar = progress_bar + remaining
+                sys.stdout.write('\r%s: [%s] %d/%d' % (mod_name, progress_bar, progress, len(url_vars)))
+                sys.stdout.flush()
+                progress = progress + 1
+
+                time.sleep(random.randrange(5, 11))
+
+            sys.stdout.write('\r%s: [%s]' % (mod_name, '##########'))
+            print 
 
         conn.commit()
         cur.close()
