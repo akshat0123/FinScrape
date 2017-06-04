@@ -70,3 +70,6 @@ class Yahoo_Summary_Mod:
             row.find("td", {"data-test": "EXDIVIDEND_DATE-value"}).find("span").get_text(),
             row.find("td", {"data-test": "ONE_YEAR_TARGET_PRICE-value"}).find("span").get_text()
         ]
+
+    def get_data(self, cur):
+        pass

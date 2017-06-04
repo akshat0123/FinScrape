@@ -154,3 +154,6 @@ class Yahoo_Statistics_Mod:
             row.findAll("table", {"class": "table-qsp-stats"})[9].findAll("tr")[8].findAll("td")[1].get_text().strip(),
             row.findAll("table", {"class": "table-qsp-stats"})[9].findAll("tr")[9].findAll("td")[1].get_text().strip()
         ]
+
+    def get_data(self, cur): 
+        pass

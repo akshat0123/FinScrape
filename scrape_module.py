@@ -33,7 +33,6 @@ class Scrape_Module:
         cur.execute(insert_string + value_string)
         conn.commit()
 
-
     def get_unformatted_rows(self, url):
 
         request = urllib2.urlopen(url)
@@ -42,11 +41,9 @@ class Scrape_Module:
 
         return self.mod.get_unformatted_rows(soup)
 
-
     def format_row(self, row):
 
         return self.mod.format_row(row)
-
 
     def save_row_values(self, row_values, cur):
 
@@ -61,3 +58,7 @@ class Scrape_Module:
         value_string += "$$%s$$);" % row_values[len(row_values)-1]
 
         cur.execute(insert_string + value_string)
+
+    def get_data(self, cur):
+
+        return self.mod.get_data(cur)

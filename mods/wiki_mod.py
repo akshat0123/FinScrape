@@ -37,3 +37,10 @@ class Wiki_Mod:
             row[3].get_text(),
             row[4].get_text()
         ]
+
+    def get_data(self, cur):
+
+        cur.execute("SELECT ticker FROM %s" % self.table_name)
+        results = cur.fetchall()
+
+        return results
